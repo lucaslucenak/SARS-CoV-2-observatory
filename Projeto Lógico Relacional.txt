@@ -5,12 +5,8 @@ Paciente (_id, nome, CPF, data_nascimento, #id_endereco)
 Enfermeiro (_COREN, nome, CPF, data_nascimento, data_inicio, data_fim, #id_endereco)
 Sintoma (_id, nome, descricao)
 Leito (_id, descricao, localizacao, #id_hospital)
---Leito (_id, descricao, localizacao)
 Registro_Desfecho(_id, situacao, #crm_medico)
 Ficha_Clinica(_id, massa, altura, pressao, oxigenacao_sangue, data_entrada, data_saida, #id_paciente, #id_registro_desfecho, #id_leito)
-
-
-
 Hospital_Cadastra_Médico(_#id_hospital, _#crm_medico)
 Hospital_Atende_Paciente(_#id_hospital, _#id_paciente)
 Hospital_Cadastra_Enfermeiro(_#id_hospital, _#coren_enfermeiro)
