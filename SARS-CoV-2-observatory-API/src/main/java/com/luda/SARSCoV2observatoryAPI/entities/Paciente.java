@@ -9,28 +9,27 @@ import java.time.Instant;
 @Entity
 @Getter
 @Setter
-@Table(name="tb_medico")
-public class Medico {
+@Table(name="tb_paciente")
+public class Paciente {
 
     @Id
-    private String crm;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String nome;
     private String cpf;
-    private Instant dataInicio;
-    private Instant dataFim;
+    private Instant dataNascimento;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_endereco", referencedColumnName = "id")
     private Endereco endereco;
 
-    public Medico() {
+    public Paciente() {
     }
 
-    public Medico(String crm, String nome, String cpf, Instant dataInicio, Instant dataFim, Endereco endereco) {
-        this.crm = crm;
+    public Paciente(Long id, String nome, String cpf, Instant dataNascimento, Endereco endereco) {
+        this.id = id;
         this.nome = nome;
         this.cpf = cpf;
-        this.dataInicio = dataInicio;
-        this.dataFim = dataFim;
+        this.dataNascimento = dataNascimento;
         this.endereco = endereco;
     }
 }

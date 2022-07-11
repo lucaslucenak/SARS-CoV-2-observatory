@@ -21,7 +21,8 @@ public class Hospital {
     private Endereco endereco;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name="tb_hospital_cadastra_medico", joinColumns = @JoinColumn(name = "id_hospital"),
+    @JoinTable(name="tb_hospital_cadastra_medico",
+            joinColumns = @JoinColumn(name = "id_hospital"),
             inverseJoinColumns = @JoinColumn(name="crm_medico"))
     private Set<Medico> medicos = new HashSet<>();
 

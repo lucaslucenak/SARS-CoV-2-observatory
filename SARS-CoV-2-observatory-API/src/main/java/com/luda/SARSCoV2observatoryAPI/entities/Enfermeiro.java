@@ -9,11 +9,11 @@ import java.time.Instant;
 @Entity
 @Getter
 @Setter
-@Table(name="tb_medico")
-public class Medico {
+@Table(name="tb_enfermeiro")
+public class Enfermeiro {
 
     @Id
-    private String crm;
+    private String coren;
     private String nome;
     private String cpf;
     private Instant dataInicio;
@@ -22,11 +22,11 @@ public class Medico {
     @JoinColumn(name = "id_endereco", referencedColumnName = "id")
     private Endereco endereco;
 
-    public Medico() {
+    public Enfermeiro() {
     }
 
-    public Medico(String crm, String nome, String cpf, Instant dataInicio, Instant dataFim, Endereco endereco) {
-        this.crm = crm;
+    public Enfermeiro(String coren, String nome, String cpf, Instant dataInicio, Instant dataFim, Endereco endereco) {
+        this.coren = coren;
         this.nome = nome;
         this.cpf = cpf;
         this.dataInicio = dataInicio;
