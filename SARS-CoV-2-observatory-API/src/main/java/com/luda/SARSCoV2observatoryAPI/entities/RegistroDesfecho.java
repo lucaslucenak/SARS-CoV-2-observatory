@@ -14,5 +14,8 @@ public class RegistroDesfecho {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private S
+    private Enum situacao;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_endereco", referencedColumnName = "id")
+    private Medico crm_medico;
 }

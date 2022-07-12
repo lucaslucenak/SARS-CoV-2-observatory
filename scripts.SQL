@@ -88,7 +88,8 @@ CREATE table Ficha_Clinica (
 create table hospital_cadastra_medico (
 	id_hospital int,
 	crm_medico varchar(30),
-	primary key (id_hospital, crm_medico),
+	data_cadastra date,
+	primary key (id_hospital, crm_medico, data_cadastra),
 	foreign key (id_hospital) references hospital(id),
 	foreign key (crm_medico) references medico(crm)
 );
@@ -96,7 +97,8 @@ create table hospital_cadastra_medico (
 create table hospital_atende_paciente (
 	id_hospital int,
 	id_paciente int,
-	primary key (id_hospital, id_paciente),
+	data_atendimento date,
+	primary key (id_hospital, id_paciente, data_atendimento),
 	foreign key (id_hospital) references hospital(id),
 	foreign key (id_paciente) references paciente(id)
 );
@@ -104,7 +106,8 @@ create table hospital_atende_paciente (
 create table hospital_cadastra_enfermeiro (
 	id_hospital int,
 	coren_enfermeiro varchar(15),
-	primary key (id_hospital, coren_enfermeiro),
+	data_cadastro date,
+	primary key (id_hospital, coren_enfermeiro, data_cadastro),
 	foreign key (id_hospital) references hospital(id),
 	foreign key (coren_enfermeiro) references enfermeiro(coren)
 );
@@ -121,7 +124,8 @@ CREATE table Ficha_clinica_tem_sintoma (
 CREATE table Enfermeiro_Difere_Ficha_Clinica  (
 	id_ficha_clinica INT,
 	coren_enfermeiro varchar(15),
-	PRIMARY KEY(id_ficha_clinica, coren_enfermeiro),
+	data_diferimento date,
+	PRIMARY KEY(id_ficha_clinica, coren_enfermeiro, data_diferimento),
 	FOREIGN KEY(id_ficha_clinica) REFERENCES ficha_clinica(id),
 	FOREIGN KEY(coren_enfermeiro) REFERENCES enfermeiro(coren)
 );
