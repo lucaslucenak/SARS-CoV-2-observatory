@@ -23,7 +23,7 @@ create table medico (
 	nome varchar(255),
 	cpf varchar(14),
 	data_nascimento DATE,
-	data_inicio DATE default CURRENT_DATE,
+	data_inicio TIMESTAMP default CURRENT_TIMESTAMP,
 	data_fim DATE,
 	id_endereco int,
 	primary key (crm),
@@ -170,3 +170,4 @@ CREATE table Medico_Prescreve_Exame (
 	FOREIGN KEY(crm_medico) REFERENCES medico(crm),
 	FOREIGN KEY(id_paciente) REFERENCES paciente(id)
 );
+
