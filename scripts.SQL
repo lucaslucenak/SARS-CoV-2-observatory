@@ -96,8 +96,8 @@ CREATE table Ficha_Clinica (
 create table hospital_cadastra_medico (
 	id_hospital int,
 	crm_medico varchar(30),
-	data_cadastro date,
-	primary key (id_hospital, crm_medico, data_cadastra),
+	data_cadastro TIMESTAMP default CURRENT_TIMESTAMP,
+	primary key (id_hospital, crm_medico, data_cadastro),
 	foreign key (id_hospital) references hospital(id),
 	foreign key (crm_medico) references medico(crm)
 );
@@ -105,7 +105,7 @@ create table hospital_cadastra_medico (
 create table hospital_atende_paciente (
 	id_hospital int,
 	id_paciente int,
-	data_atendimento date,
+	data_atendimento TIMESTAMP default CURRENT_TIMESTAMP,
 	primary key (id_hospital, id_paciente, data_atendimento),
 	foreign key (id_hospital) references hospital(id),
 	foreign key (id_paciente) references paciente(id)
@@ -114,7 +114,7 @@ create table hospital_atende_paciente (
 create table hospital_cadastra_enfermeiro (
 	id_hospital int,
 	coren_enfermeiro varchar(15),
-	data_cadastro date,
+	data_cadastro TIMESTAMP default CURRENT_TIMESTAMP,
 	primary key (id_hospital, coren_enfermeiro, data_cadastro),
 	foreign key (id_hospital) references hospital(id),
 	foreign key (coren_enfermeiro) references enfermeiro(coren)
@@ -123,7 +123,7 @@ create table hospital_cadastra_enfermeiro (
 CREATE table Ficha_clinica_tem_sintoma (
 	id_sintoma INT,
 	id_ficha_clinica INT,
-	data_sintoma DATE,
+	data_sintoma TIMESTAMP default CURRENT_TIMESTAMP,
 	PRIMARY KEY(id_sintoma, id_ficha_clinica, data_sintoma),
 	FOREIGN KEY(id_sintoma) REFERENCES sintoma(id),
 	FOREIGN KEY(id_ficha_clinica) REFERENCES ficha_clinica(id)
@@ -141,7 +141,7 @@ CREATE table Enfermeiro_Difere_Ficha_Clinica  (
 create table medico_visita_paciente (
 	crm_medico varchar(30),
 	id_paciente int,
-	data_visita date default current_date,
+	data_visita TIMESTAMP default CURRENT_TIMESTAMP,
 	primary key (crm_medico, id_paciente, data_visita),
 	foreign key (crm_medico) references medico(crm),
 	foreign key (id_paciente) references paciente(id)
@@ -152,7 +152,7 @@ create table medico_prescreve_tratamento (
 	id_paciente int,
 	nome varchar(255),
 	descricao text,
-	data_prescricao date default current_date,
+	data_prescricao TIMESTAMP default CURRENT_TIMESTAMP,
 	data_realicacao date,
 	primary key (crm_medico, id_paciente, data_prescricao),
 	foreign key (crm_medico) references medico(crm),
@@ -164,10 +164,20 @@ CREATE table Medico_Prescreve_Exame (
 	id_paciente INT,
 	nome varchar(255),
 	descricao TEXT,
-	data_prescricao date default current_date,
+	data_prescricao TIMESTAMP default CURRENT_TIMESTAMP,
 	data_realizacao date,
 	PRIMARY KEY(crm_medico, id_paciente, data_prescricao),
 	FOREIGN KEY(crm_medico) REFERENCES medico(crm),
 	FOREIGN KEY(id_paciente) REFERENCES paciente(id)
 );
 
+INSERT INTO endereco (rua, numero, cep, bairro, cidade) values ('rua iremar marinho', '123', '58000-400', 'bairro dos bobos', 'campina grande');
+INSERT INTO endereco (rua, numero, cep, bairro, cidade, complemento) values ('rua juraci palhano', '22', '58000-012', 'catole', 'campina grande', 'perto de lá');
+INSERT INTO endereco (rua, numero, cep, bairro, cidade, complemento) values ('avenida floriano peixoto', '912', '58000-020', 'sao josé', 'campina grande', 'perto daqui');
+
+INSERT INTO hospital (nome, id_endereco) values ('João XXIII', 1);
+INSERT INTO hospital (nome, id_endereco) values ('Trauma', 2);
+INSERT INTO hospital (nome, id_endereco) values ('UPA', 3);
+
+INSERT INTO medico (crm, nome, cpf, data_nascimento, id_endereco) values ('32145321-1/BR', 'Daniel', '321.123.321-21',  '2001-05-05', 1);
+INSERT INTO medico (crm, nome, cpf, data_nascimento, id_endereco, data_fim) values ('32555321-0/BR', 'Lucas', '321.123.321-21', '2001-10-03', 3, '2022-07-14');
