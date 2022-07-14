@@ -24,7 +24,7 @@ create table medico (
 	cpf varchar(14),
 	data_nascimento DATE,
 	data_inicio TIMESTAMP default CURRENT_TIMESTAMP,
-	data_fim DATE,
+	data_fim date,
 	id_endereco int,
 	primary key (crm),
 	foreign key (id_endereco) references endereco(id)
@@ -45,8 +45,8 @@ CREATE table Enfermeiro (
 	nome varchar(255),
 	cpf varchar(14),
 	data_nascimento DATE,
-	data_inicio date default CURRENT_DATE,
-	data_fim DATE,
+	data_inicio TIMESTAMP default CURRENT_TIMESTAMP,
+	data_fim date,
 	id_endereco INT,
 	PRIMARY KEY(coren),
 	FOREIGN KEY(id_endereco) REFERENCES endereco(id)
@@ -82,7 +82,7 @@ CREATE table Ficha_Clinica (
 	altura decimal,
 	pressao varchar(10),
 	oxigenacao_sangue INT,
-	data_entrada date default current_date,
+	data_entrada TIMESTAMP default CURRENT_TIMESTAMP,
 	data_saida date,
 	id_paciente INT,
 	id_registro_desfecho INT,
@@ -96,7 +96,7 @@ CREATE table Ficha_Clinica (
 create table hospital_cadastra_medico (
 	id_hospital int,
 	crm_medico varchar(30),
-	data_cadastra date,
+	data_cadastro date,
 	primary key (id_hospital, crm_medico, data_cadastra),
 	foreign key (id_hospital) references hospital(id),
 	foreign key (crm_medico) references medico(crm)
