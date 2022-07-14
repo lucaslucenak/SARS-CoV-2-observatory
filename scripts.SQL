@@ -9,7 +9,6 @@ CREATE TABLE endereco (
 	primary key (id)
 );
 
- 
  create table hospital (
  	id serial,
  	nome varchar(255),
@@ -54,7 +53,7 @@ CREATE table Enfermeiro (
 
 create table sintoma (
 	id serial,
-	nome varchar(255),
+	nome varchar(255) unique,
 	descricao text,
 	primary key (id)
 );
@@ -76,7 +75,7 @@ create table registro_desfecho (
 	foreign key (crm_medico) references medico(crm)
 );
 
-CREATE table Ficha_Clinica (
+CREATE table ficha_clinica (
 	id SERIAL,
 	massa decimal,
 	altura decimal,
@@ -120,7 +119,7 @@ create table hospital_cadastra_enfermeiro (
 	foreign key (coren_enfermeiro) references enfermeiro(coren)
 );
 
-CREATE table Ficha_clinica_tem_sintoma (
+CREATE table ficha_clinica_tem_sintoma (
 	id_sintoma INT,
 	id_ficha_clinica INT,
 	data_sintoma TIMESTAMP default CURRENT_TIMESTAMP,
@@ -132,7 +131,7 @@ CREATE table Ficha_clinica_tem_sintoma (
 CREATE table Enfermeiro_Difere_Ficha_Clinica  (
 	id_ficha_clinica INT,
 	coren_enfermeiro varchar(15),
-	data_diferimento date,
+	data_diferimento TIMESTAMP default CURRENT_TIMESTAMP,
 	PRIMARY KEY(id_ficha_clinica, coren_enfermeiro, data_diferimento),
 	FOREIGN KEY(id_ficha_clinica) REFERENCES ficha_clinica(id),
 	FOREIGN KEY(coren_enfermeiro) REFERENCES enfermeiro(coren)
@@ -159,7 +158,7 @@ create table medico_prescreve_tratamento (
 	foreign key (id_paciente) references paciente(id)
 );
 
-CREATE table Medico_Prescreve_Exame (
+CREATE table medico_Prescreve_Exame (
 	crm_medico varchar(30),
 	id_paciente INT,
 	nome varchar(255),
@@ -171,6 +170,7 @@ CREATE table Medico_Prescreve_Exame (
 	FOREIGN KEY(id_paciente) REFERENCES paciente(id)
 );
 
+
 INSERT INTO endereco (rua, numero, cep, bairro, cidade) values ('rua iremar marinho', '123', '58000-400', 'bairro dos bobos', 'campina grande');
 INSERT INTO endereco (rua, numero, cep, bairro, cidade, complemento) values ('rua juraci palhano', '22', '58000-012', 'catole', 'campina grande', 'perto de lá');
 INSERT INTO endereco (rua, numero, cep, bairro, cidade, complemento) values ('avenida floriano peixoto', '912', '58000-020', 'sao josé', 'campina grande', 'perto daqui');
@@ -181,3 +181,63 @@ INSERT INTO hospital (nome, id_endereco) values ('UPA', 3);
 
 INSERT INTO medico (crm, nome, cpf, data_nascimento, id_endereco) values ('32145321-1/BR', 'Daniel', '321.123.321-21',  '2001-05-05', 1);
 INSERT INTO medico (crm, nome, cpf, data_nascimento, id_endereco, data_fim) values ('32555321-0/BR', 'Lucas', '321.123.321-21', '2001-10-03', 3, '2022-07-14');
+
+INSERT INTO paciente (nome, cpf, data_nascimento, id_endereco) VALUES ('Paciente Vinicius', '999.888.777-22', '2020-04-13', 2);
+INSERT INTO paciente (nome, cpf, data_nascimento, id_endereco) VALUES ('Paciente Joseilton', '992.458.877-02', '2010-03-13', 2);
+
+insert into enfermeiro (coren, nome, cpf, data_nascimento, data_fim, id_endereco) values ('453627PB', 'Jailma', '321.123.943-21', '1997-05-05', '2005-05-05', 1);
+insert into enfermeiro (coren, nome, cpf, data_nascimento, id_endereco) values ('453927PB', 'Joselito', '321.123.947-21', '1992-05-05', 1);
+
+INSERT INTO sintoma (nome, descricao) values ('Febre', 'Temperatura maior ou igual a 38°C');
+INSERT INTO sintoma (nome, descricao) values ('Tosse', 'Tosse com catarro');
+
+insert into leito (descricao, localizacao, id_hospital) values ('Leito para estado crônico', 'Quarto 54B', 1);
+insert into leito (descricao, localizacao, id_hospital) values ('Leito para entubamento', 'Quarto 51B', 2);
+
+insert into registro_desfecho (situacao, crm_medico) VALUES ('Saudável', '32145321-1/BR');
+insert into registro_desfecho (situacao, crm_medico) VALUES ('Falecido', '32145321-1/BR');
+
+insert into ficha_clinica (massa, altura, pressao, oxigenacao_sangue, data_saida, id_paciente, id_registro_desfecho, id_leito) values (80.45, 1.79, '12/8', 98, '2022-07-14', 1, 2, 1);
+insert into ficha_clinica (massa, altura, pressao, oxigenacao_sangue, data_saida, id_paciente, id_registro_desfecho, id_leito) values (100.85, 1.58, '15/9', 96, '2018-02-24', 2, 1, 1);
+
+insert into hospital_cadastra_medico (id_hospital, crm_medico) values (1, '32145321-1/BR');
+insert into hospital_cadastra_medico (id_hospital, crm_medico) values (3, '32555321-0/BR');
+
+insert into hospital_atende_paciente (id_hospital, id_paciente) values (1, 1);
+insert into hospital_atende_paciente (id_hospital, id_paciente) values (3, 2);
+
+insert into hospital_cadastra_enfermeiro (id_hospital, coren_enfermeiro) values (1, '453627PB');
+insert into hospital_cadastra_enfermeiro (id_hospital, coren_enfermeiro) values (2, '453627PB');
+
+INSERT INTO ficha_clinica_tem_sintoma (id_sintoma, id_ficha_clinica) values (1, 2);
+INSERT INTO ficha_clinica_tem_sintoma (id_sintoma, id_ficha_clinica) values (2, 1);
+
+insert into enfermeiro_difere_ficha_clinica (id_ficha_clinica, coren_enfermeiro) values (1, '453627PB');
+insert into enfermeiro_difere_ficha_clinica (id_ficha_clinica, coren_enfermeiro) values (2, '453927PB');
+
+insert into medico_visita_paciente (crm_medico, id_paciente) values ('32555321-0/BR', 2);
+insert into medico_visita_paciente (crm_medico, id_paciente) values ('32555321-0/BR', 1);
+
+insert into medico_prescreve_tratamento (crm_medico, id_paciente, nome, descricao, data_realicacao) values ('32145321-1/BR', 2, 'Caixa de espelhos', 'modalidade terapêutica baseada no feedback visual, como forma de construção de uma nova imagem mental do membro afetado, promovendo a reorganização cortical', '2022-07-18');
+insert into medico_prescreve_tratamento (crm_medico, id_paciente, nome, descricao, data_realicacao) values ('32145321-1/BR', 1, 'Crisoterapia', 'consiste na utilização de ouro ou os sais desse mineral no tratamento curativo ou paliativo de seres humanos', '2022-07-20');
+
+insert into medico_Prescreve_Exame (crm_medico, id_paciente, nome, descricao, data_realizacao) values ('32555321-0/BR', 1, 'Exame de sangue', 'Imunoglobinas e hemoglobinas', '2022-07-15');
+insert into medico_Prescreve_Exame (crm_medico, id_paciente, nome, data_realizacao) values ('32555321-0/BR', 2, 'Glicemia', '2022-07-18');
+
+select * from medico_Prescreve_Exame;
+SELECT * FROM endereco;
+select * from hospital;
+select * from medico;
+SELECT * from paciente;
+select * from enfermeiro;
+select * from sintoma;
+select * from leito;
+select * from registro_desfecho;
+select * from ficha_clinica;
+select * from hospital_cadastra_medico;
+select * from hospital_atende_paciente;
+select * from hospital_cadastra_enfermeiro;
+SELECT * from ficha_clinica_tem_sintoma;
+select * from enfermeiro_difere_ficha_clinica;
+select * from medico_visita_paciente;
+select * from medico_prescreve_tratamento;
