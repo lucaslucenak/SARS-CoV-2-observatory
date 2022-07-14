@@ -22,7 +22,12 @@ create table medico (
 	crm varchar(30),
 	nome varchar(255),
 	cpf varchar(14),
-	primary key (crm)
+	data_nascimento DATE,
+	data_inicio DATE default CURRENT_DATE,
+	data_fim DATE,
+	id_endereco int,
+	primary key (crm),
+	foreign key (id_endereco) references endereco(id)
 );
 
 CREATE table Paciente (
@@ -75,7 +80,10 @@ CREATE table Ficha_Clinica (
 	id SERIAL,
 	massa decimal,
 	altura decimal,
+	pressao varchar(10),
 	oxigenacao_sangue INT,
+	data_entrada date default current_date,
+	data_saida date,
 	id_paciente INT,
 	id_registro_desfecho INT,
 	id_leito INT,
@@ -116,7 +124,7 @@ CREATE table Ficha_clinica_tem_sintoma (
 	id_sintoma INT,
 	id_ficha_clinica INT,
 	data_sintoma DATE,
-	PRIMARY KEY(id_sintoma, id_ficha_clinica),
+	PRIMARY KEY(id_sintoma, id_ficha_clinica, data_sintoma),
 	FOREIGN KEY(id_sintoma) REFERENCES sintoma(id),
 	FOREIGN KEY(id_ficha_clinica) REFERENCES ficha_clinica(id)
 );
@@ -134,7 +142,7 @@ create table medico_visita_paciente (
 	crm_medico varchar(30),
 	id_paciente int,
 	data_visita date default current_date,
-	primary key (crm_medico, id_paciente),
+	primary key (crm_medico, id_paciente, data_visita),
 	foreign key (crm_medico) references medico(crm),
 	foreign key (id_paciente) references paciente(id)
 );
@@ -142,12 +150,11 @@ create table medico_visita_paciente (
 create table medico_prescreve_tratamento (
 	crm_medico varchar(30),
 	id_paciente int,
-	id serial,
 	nome varchar(255),
 	descricao text,
 	data_prescricao date default current_date,
 	data_realicacao date,
-	primary key (crm_medico, id_paciente, id),
+	primary key (crm_medico, id_paciente, data_prescricao),
 	foreign key (crm_medico) references medico(crm),
 	foreign key (id_paciente) references paciente(id)
 );
@@ -155,12 +162,11 @@ create table medico_prescreve_tratamento (
 CREATE table Medico_Prescreve_Exame (
 	crm_medico varchar(30),
 	id_paciente INT,
-	id serial,
 	nome varchar(255),
 	descricao TEXT,
-	data_prescricao date default current_Date,
+	data_prescricao date default current_date,
 	data_realizacao date,
-	PRIMARY KEY(crm_medico, id_paciente, id),
+	PRIMARY KEY(crm_medico, id_paciente, data_prescricao),
 	FOREIGN KEY(crm_medico) REFERENCES medico(crm),
 	FOREIGN KEY(id_paciente) REFERENCES paciente(id)
 );
