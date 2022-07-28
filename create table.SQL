@@ -9,7 +9,7 @@ CREATE TABLE endereco (
 	PRIMARY KEY (id)
 );
 
- CREATE table hospital (
+ CREATE TABLE hospital (
  	id SERIAL,
  	nome VARCHAR(255),
  	id_endereco INT,
@@ -17,7 +17,7 @@ CREATE TABLE endereco (
  	FOREIGN KEY (id_endereco) REFERENCES endereco (id)
  );
  
-CREATE table medico (
+CREATE TABLE medico (
 	crm VARCHAR(30),
 	nome VARCHAR(255),
 	cpf VARCHAR(14),
@@ -29,7 +29,7 @@ CREATE table medico (
 	FOREIGN KEY (id_endereco) REFERENCES endereco(id)
 );
 
-CREATE table Paciente (
+CREATE TABLE Paciente (
 	id SERIAL,
 	nome VARCHAR(255),
 	cpf VARCHAR(14),
@@ -39,7 +39,7 @@ CREATE table Paciente (
 	FOREIGN KEY(id_endereco) REFERENCES endereco(id)
 );
 
-CREATE table Enfermeiro (
+CREATE TABLE Enfermeiro (
 	coren VARCHAR(15),
 	nome VARCHAR(255),
 	cpf VARCHAR(14),
@@ -51,14 +51,14 @@ CREATE table Enfermeiro (
 	FOREIGN KEY(id_endereco) REFERENCES endereco(id)
 );
 
-CREATE table sintoma (
+CREATE TABLE sintoma (
 	id SERIAL,
 	nome VARCHAR(255) UNIQUE,
 	descricao TEXT,
 	PRIMARY KEY (id)
 );
 
-CREATE table Leito (
+CREATE TABLE Leito (
 	id SERIAL,
 	descricao TEXT,
 	localizacao VARCHAR(25),
@@ -67,7 +67,7 @@ CREATE table Leito (
 	FOREIGN KEY(id_hospital) REFERENCES hospital(id)
 );
 
-CREATE table registro_desfecho (
+CREATE TABLE registro_desfecho (
 	id SERIAL,
 	situacao VARCHAR(255),
 	crm_medico VARCHAR(30),
@@ -75,7 +75,7 @@ CREATE table registro_desfecho (
 	FOREIGN KEY (crm_medico) REFERENCES medico(crm)
 );
 
-CREATE table ficha_clinica (
+CREATE TABLE ficha_clinica (
 	id SERIAL,
 	massa DECIMAL,
 	altura DECIMAL,
@@ -92,7 +92,7 @@ CREATE table ficha_clinica (
 	FOREIGN KEY(id_leito) REFERENCES leito(id)
 );
 
-CREATE table hospital_cadastra_medico (
+CREATE TABLE hospital_cadastra_medico (
 	id_hospital INT,
 	crm_medico VARCHAR(30),
 	data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -101,7 +101,7 @@ CREATE table hospital_cadastra_medico (
 	FOREIGN KEY (crm_medico) REFERENCES medico(crm)
 );
 
-CREATE table hospital_atende_paciente (
+CREATE TABLE hospital_atende_paciente (
 	id_hospital INT,
 	id_paciente INT,
 	data_atendimento TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -110,7 +110,7 @@ CREATE table hospital_atende_paciente (
 	FOREIGN KEY (id_paciente) REFERENCES paciente(id)
 );
 
-CREATE table hospital_cadastra_enfermeiro (
+CREATE TABLE hospital_cadastra_enfermeiro (
 	id_hospital INT,
 	coren_enfermeiro VARCHAR(15),
 	data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -119,7 +119,7 @@ CREATE table hospital_cadastra_enfermeiro (
 	FOREIGN KEY (coren_enfermeiro) REFERENCES enfermeiro(coren)
 );
 
-CREATE table ficha_clinica_tem_sintoma (
+CREATE TABLE ficha_clinica_tem_sintoma (
 	id_sintoma INT,
 	id_ficha_clinica INT,
 	data_sintoma TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -128,7 +128,7 @@ CREATE table ficha_clinica_tem_sintoma (
 	FOREIGN KEY(id_ficha_clinica) REFERENCES ficha_clinica(id)
 );
 
-CREATE table Enfermeiro_Difere_Ficha_Clinica  (
+CREATE TABLE Enfermeiro_Difere_Ficha_Clinica  (
 	id_ficha_clinica INT,
 	coren_enfermeiro VARCHAR(15),
 	data_diferimento TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -137,7 +137,7 @@ CREATE table Enfermeiro_Difere_Ficha_Clinica  (
 	FOREIGN KEY(coren_enfermeiro) REFERENCES enfermeiro(coren)
 );
 
-CREATE table medico_visita_paciente (
+CREATE TABLE medico_visita_paciente (
 	crm_medico VARCHAR(30),
 	id_paciente INT,
 	data_visita TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -146,7 +146,7 @@ CREATE table medico_visita_paciente (
 	FOREIGN KEY (id_paciente) REFERENCES paciente(id)
 );
 
-CREATE table medico_prescreve_tratamento (
+CREATE TABLE medico_prescreve_tratamento (
 	crm_medico VARCHAR(30),
 	id_paciente INT,
 	nome VARCHAR(255),
@@ -158,7 +158,7 @@ CREATE table medico_prescreve_tratamento (
 	FOREIGN KEY (id_paciente) REFERENCES paciente(id)
 );
 
-CREATE table medico_Prescreve_Exame (
+CREATE TABLE medico_Prescreve_Exame (
 	crm_medico VARCHAR(30),
 	id_paciente INT,
 	nome VARCHAR(255),
