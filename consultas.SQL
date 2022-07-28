@@ -4,19 +4,19 @@ INNER JOIN leito l ON (fc.id_leito = l.id)
 INNER JOIN hospital h ON (l.id_hospital = h.id)
 WHERE ((fc.data_entrada BETWEEN '2020-03-01' AND '2020-10-22') AND (fc.data_saida IS NULL));
 
-SELECT p.nome as "nome paciente", s.nome as "nome sintoma"
+SELECT p.nome as "nome paciente", s.nome as "nome sintoma", m.nome AS "nome medico"
 FROM ficha_clinica fc
 INNER JOIN paciente p ON (fc.id_paciente = p.id)
 INNER JOIN ficha_clinica_tem_sintoma fcts ON (fcts.id_ficha_clinica = fc.id)
 INNER JOIN sintoma s ON (fcts.id_sintoma = s.id)
 INNER JOIN medico_prescreve_tratamento mpt ON (mpt.id_paciente = p.id)
 INNER JOIN medico m ON (mpt.crm_medico = m.crm)
-WHERE (m.nome = 'Daniel'); --TROCAR DANIEL POR CARLOS, ACRESCENTAR CARLOS NO BANCO KKKKKK E SEUS SINTOMAS E PACIENTES E LOGO TUDO
+WHERE (m.nome = 'Carlos'); --TROCAR DANIEL POR CARLOS, ACRESCENTAR CARLOS NO BANCO KKKKKK E SEUS SINTOMAS E PACIENTES E LOGO TUDO
 
-SELECT mpe.crm_medico, mpe.id_paciente, mpe.nome
+SELECT mpe.data_prescricao AS "id exame", mpe.crm_medico, m.nome AS "nome medico", mpe.id_paciente, mpe.nome
 FROM medico_Prescreve_Exame mpe
 INNER JOIN medico m ON (mpe.crm_medico = m.crm)
-WHERE ((m.nome = 'Lucas') AND (mpe.data_prescricao BETWEEN '2020-06-01' AND '2020-09-30')); -- TROCAR LUCAS POR JOAO
+WHERE ((m.nome = 'Joao') AND (mpe.data_prescricao BETWEEN '2020-06-01' AND '2020-09-30'));
 
 SELECT h.nome, COUNT(p.id) as "total de pacientes"
 FROM hospital_atende_paciente hap
