@@ -47,6 +47,9 @@ INSERT INTO ficha_clinica (massa, altura, pressao, oxigenacao_sangue, id_pacient
 INSERT INTO hospital_cadastra_medico (id_hospital, crm_medico) VALUES (1, '32145321-1/BR');
 INSERT INTO hospital_cadastra_medico (id_hospital, crm_medico) VALUES (3, '32555321-0/BR');
 INSERT INTO hospital_cadastra_medico (id_hospital, crm_medico) VALUES (2, '67555321-0/BR');
+INSERT INTO hospital_cadastra_medico (id_hospital, crm_medico) VALUES (2, '97125321-0/BR');
+INSERT INTO hospital_cadastra_medico (id_hospital, crm_medico) VALUES (2, '20865321-0/BR');
+INSERT INTO hospital_cadastra_medico (id_hospital, crm_medico) VALUES (2, '00865321-0/BR');
 
 INSERT INTO hospital_atende_paciente (id_hospital, id_paciente) VALUES (1, 1);
 INSERT INTO hospital_atende_paciente (id_hospital, id_paciente) VALUES (3, 2);
@@ -55,6 +58,9 @@ INSERT INTO hospital_atende_paciente (id_hospital, id_paciente) VALUES (2, 5);
 
 INSERT INTO hospital_cadastra_enfermeiro (id_hospital, coren_enfermeiro) VALUES (1, '453627PB');
 INSERT INTO hospital_cadastra_enfermeiro (id_hospital, coren_enfermeiro) VALUES (3, '453627PB');
+INSERT INTO hospital_cadastra_enfermeiro (id_hospital, coren_enfermeiro) VALUES (3, '321927PB');
+INSERT INTO hospital_cadastra_enfermeiro (id_hospital, coren_enfermeiro) VALUES (3, '213927PB');
+INSERT INTO hospital_cadastra_enfermeiro (id_hospital, coren_enfermeiro) VALUES (3, '444927PB');
 
 INSERT INTO ficha_clinica_tem_sintoma (id_sintoma, id_ficha_clinica) VALUES (1, 2);
 INSERT INTO ficha_clinica_tem_sintoma (id_sintoma, id_ficha_clinica) VALUES (2, 1);
