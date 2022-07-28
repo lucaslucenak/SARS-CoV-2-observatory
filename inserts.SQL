@@ -11,16 +11,22 @@ INSERT INTO hospital (nome, id_endereco) VALUES ('UPA', 3);
 INSERT INTO medico (crm, nome, cpf, data_nascimento, id_endereco, data_inicio) VALUES ('32145321-1/BR', 'Daniel', '321.123.321-21',  '2001-05-05', 1, '2020-05-14');
 INSERT INTO medico (crm, nome, cpf, data_nascimento, id_endereco, data_fim, data_inicio) VALUES ('32555321-0/BR', 'Lucas', '321.123.321-21', '2001-10-03', 3, '2022-07-14', '2020-08-25');
 INSERT INTO medico (crm, nome, cpf, data_nascimento, id_endereco, data_inicio) VALUES ('67555321-0/BR', 'Carlos', '331.122.321-29', '2001-10-03', 3, '2020-08-25');
-INSERT INTO medico (crm, nome, cpf, data_nascimento, id_endereco, data_inicio) VALUES ('97125321-0/BR', 'Joao', '888.333.222-44', '2001-10-03', 3, '2020-08-25');
+INSERT INTO medico (crm, nome, cpf, data_nascimento, id_endereco, data_inicio) VALUES ('97125321-0/BR', 'Joao', '888.333.222-44', '2001-10-03', 2, '2020-08-25');
+INSERT INTO medico (crm, nome, cpf, data_nascimento, id_endereco, data_inicio) VALUES ('20865321-0/BR', 'Farias', '111.333.222-44', '1905-10-03', 3, '2020-08-25');
+INSERT INTO medico (crm, nome, cpf, data_nascimento, id_endereco, data_inicio) VALUES ('00865321-0/BR', 'Montecarlos', '555.222.333-11', '2000-10-03', 2, '2020-08-25');
 
 INSERT INTO paciente (nome, cpf, data_nascimento, id_endereco) VALUES ('Paciente Vinicius', '999.888.777-22', '2020-04-13', 4);
 INSERT INTO paciente (nome, cpf, data_nascimento, id_endereco) VALUES ('Paciente Joseilton', '992.458.877-02', '2010-03-13', 4);
 INSERT INTO paciente (nome, cpf, data_nascimento, id_endereco) VALUES ('Paciente Maria', '912.478.817-82', '2010-01-13', 5);
 INSERT INTO paciente (nome, cpf, data_nascimento, id_endereco) VALUES ('Paciente Gabriel', '012.978.827-72', '2017-04-13', 5);
 INSERT INTO paciente (nome, cpf, data_nascimento, id_endereco) VALUES ('Paciente Mariano', '912.958.117-92', '2005-08-13', 5);
+INSERT INTO paciente (nome, cpf, data_nascimento, id_endereco) VALUES ('Paciente Mariano', '912.958.117-92', '2005-08-13', 5);
 
 INSERT INTO enfermeiro (coren, nome, cpf, data_nascimento, data_fim, id_endereco) VALUES ('453627PB', 'Jailma', '321.123.943-21', '1997-05-05', '2005-05-05', 1);
 INSERT INTO enfermeiro (coren, nome, cpf, data_nascimento, id_endereco) VALUES ('453927PB', 'Joselito', '321.123.947-21', '1992-05-05', 1);
+INSERT INTO enfermeiro (coren, nome, cpf, data_nascimento, id_endereco) VALUES ('321927PB', 'Jeremias', '000.000.947-21', '1995-12-05', 1);
+INSERT INTO enfermeiro (coren, nome, cpf, data_nascimento, id_endereco) VALUES ('213927PB', 'Vanderleia', '321.123.947-21', '2000-12-05', 1);
+INSERT INTO enfermeiro (coren, nome, cpf, data_nascimento, id_endereco) VALUES ('444927PB', 'Marisvaldo', '321.123.947-21', '1980-05-01', 1);
 
 INSERT INTO sintoma (nome, descricao) VALUES ('Febre', 'Temperatura maior ou igual a 38°C');
 INSERT INTO sintoma (nome, descricao) VALUES ('Tosse', 'Tosse com catarro');
