@@ -23,8 +23,23 @@ FROM hospital_atende_paciente hap
 INNER JOIN hospital h ON (hap.id_hospital = h.id)
 INNER JOIN paciente p ON (hap.id_paciente = p.id)
 INNER JOIN ficha_clinica fc ON (fc.id_paciente = p.id)
-WHERE ((fc.id_leito is not NULL) AND (fc.data_entrada BETWEEN '2020-05-01' AND '2020-07-30'))
+WHERE ((fc.id_leito is not NULL) AND (fc.data_entrada BETWEEN '2020-05-01' AND '2020-07-30') AND (fc.data_saida IS NULL))
 GROUP BY h.nome;
+
+
+SELECT h.nome, (COUNT(hce.coren_enfermeiro) / ( select COUNT(e.coren) FROM enfermeiro e)) AS "media"
+FROM hospital h
+INNER JOIN hospital_cadastra_enfermeiro hce ON (hce.id_hospital = h.id)
+INNER JOIN enfermeiro e ON (hce.coren_enfermeiro = e.coren)
+GROUP BY (h.nome);
+
+
+
+
+
+
+
+
 
 SELECT h.nome, COUNT(hce.coren_enfermeiro) / COUNT(e.coren) AS "media enfermeiros", COUNT(hcm.crm_medico) / COUNT(m.crm) AS "media medicos"
 FROM hospital h
